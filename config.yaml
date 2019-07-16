@@ -1,0 +1,17 @@
+roles:
+  -
+    count: 1
+    hostname_template: svr%02i
+  -
+    count: 1
+    hostname_template: cli%02i
+node:
+  box: ubuntu/bionic64
+  box_url: ubuntu/bionic64
+  cpus: 2
+  memory: 4096
+net:
+  private_nic_type: 82545EM
+  network_type: private_network
+ip:
+  node: 192.168.56.150
