@@ -11,17 +11,28 @@ node_ip = IPAddr.new(configs.fetch('ip').fetch('node'))
 roles = configs.fetch('roles')
 
 Vagrant.configure("2") do |config|
-    roles.each do | role |
+    roles.each do |role|
         count = role.fetch('count')
         hostname_template = role.fetch('hostname_template')
-        (1..count).each do | i |
+
+        (1..count).each do |i|
             hostname = hostname_template % i
             config.vm.define hostname do |node|
                 node.vm.box = node_configs.fetch('box')
                 node.vm.box_url = node_configs.fetch('box_url')
                 node.vm.provider "virtualbox" do |v|
-                    v.cpus = node_configs.fetch('cpus')
-                    v.memory = node_configs.fetch('memory')
+                    if role.has_key?('cpus')
+                        v.cpus = role.fetch('cpus')
+                    else
+                        v.cpus = node_configs.fetch('cpus')
+                    end
+
+                    if role.has_key?('memory')
+                        v.memory = role.fetch('memory')
+                    else
+                        v.memory = node_configs.fetch('memory')
+                    end
+
                     v.name = hostname
                 end
 
