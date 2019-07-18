@@ -9,12 +9,12 @@ puts "Config: #{configs.inspect}\n\n"
 node_configs = configs.fetch('node')
 node_ip = IPAddr.new(configs.fetch('ip').fetch('node'))
 roles = configs.fetch('roles')
+prefix = node_configs.fetch('prefix')
 
 Vagrant.configure("2") do |config|
     roles.each do |role|
         count = role.fetch('count')
         hostname_template = role.fetch('hostname_template')
-
         (1..count).each do |i|
             hostname = hostname_template % i
             config.vm.define hostname do |node|
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
                         v.memory = node_configs.fetch('memory')
                     end
 
-                    v.name = hostname
+                    v.name = [prefix, hostname].join('-').squeeze('-')
                 end
 
                 node.vm.network configs.fetch('net').fetch('network_type'), ip: IPAddr.new(node_ip.to_i + i - 1, Socket::AF_INET).to_s, nic_type: $private_nic_type

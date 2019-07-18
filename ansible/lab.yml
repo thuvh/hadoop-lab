@@ -1,0 +1,9 @@
+- hosts: lab01 
+  vars_files:
+   - vars/user.yml
+   - vars/var_basic.yml
+  vars:
+     add_user: true
+  roles:
+    - user
+    - java

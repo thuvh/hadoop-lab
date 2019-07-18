@@ -1,39 +1,52 @@
 roles:
+  # -
+  #   count: 1
+  #   hostname_template: nn%02i
+  #   description: namenode
+  # -
+  #   count: 1
+  #   hostname_template: sn%02i
+  #   description: secondary namenode
+  #   cpus: 2
+  #   memory: 6144
+  # -
+  #   count: 3
+  #   hostname_template: dn%02i
+  #   description: datanode
+  # -
+  #   count: 1
+  #   hostname_template: rs%02i
+  #   description: resource manager
+  # -
+  #   count: 1
+  #   hostname_template: wp%02i
+  #   description: proxy 
+  # -
+  #   count: 1
+  #   hostname_template: sm%02i
+  #   description: spark master
+  # -
+  #   count: 1
+  #   hostname_template: ts%02i
+  #   description: timeline server
+  # -
+  #   count: 1
+  #   hostname_template: hs%02i
+  #   description: history server
+  # -
+  #   count: 2
+  #   hostname_template: ps%02i
+  #   description: postgresql
   -
     count: 1
-    hostname_template: nn%02i
-    description: namenode
-  -
-    count: 1
-    hostname_template: sn%02i
-    description: secondary namenode
-    cpus: 2
-    memory: 6144
-  -
-    count: 3
-    hostname_template: dn%02i
-    description: datanode
-  -
-    count: 1
-    hostname_template: rs%02i
-    description: resource manager
-  -
-    count: 1
-    hostname_template: spark%02i
-    description: spark
-  -
-    count: 1
-    hostname_template: ts%02i
-    description: timeline server
-  -
-    count: 1
-    hostname_template: hs%02i
-    description: history server
+    hostname_template: lab%02i
+    description: lab
 node:
-  box: ubuntu/bionic64
-  box_url: ubuntu/bionic64
+  box: ubuntu/xenial64
+  box_url: ubuntu/xenial64
   cpus: 2
   memory: 4096
+  prefix: hadoop
 net:
   private_nic_type: 82545EM
   network_type: private_network

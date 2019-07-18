@@ -1,0 +1,5 @@
+---
+- name: Add user
+  user: name={{user}} shell=/bin/bash append=yes
+  become: yes
+  when: add_user
