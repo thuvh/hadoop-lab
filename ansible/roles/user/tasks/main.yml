@@ -2,4 +2,38 @@
 - name: Add user
   user: name={{user}} shell=/bin/bash append=yes
   become: yes
+  register: user_created
   when: add_user
+
+- name: Create a directory if it does not exist
+  file:
+    path: /home/{{ user }}/.ssh
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    state: directory
+    mode: '0700'
+  become: yes
+  register: home_ssd_created
+  when: user_created is success
+
+- name: List file in ssh of thuvh
+  find:
+    path: /home/thuvh/.ssh
+    recurse: yes
+    file_type: any
+  become: yes
+  register: find_result
+  when: user_created is success
+
+- name: Copy the files
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ item.path | regex_replace('/home/thuvh/.ssh', '/home/' + user + '/.ssh') }}"
+    remote_src: yes
+    mode: "{{ item.mode }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  become: yes
+  with_items:
+    - "{{ find_result.files }}"
+  when: find_result is success and item.isdir == False
