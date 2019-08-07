@@ -16,6 +16,7 @@ node_ip = IPAddr.new(configs.fetch('ip').fetch('node'))
 roles = configs.fetch('roles')
 prefix = node_configs.fetch('prefix')
 domain = node_configs.fetch('domain')
+idx = 0
 
 Vagrant.configure("2") do |config|
   roles.each do |role|
@@ -25,11 +26,13 @@ Vagrant.configure("2") do |config|
     hostname_template = role.fetch('hostname_template')
     (1..count).each do |i|
       hostname = hostname_template % i
-      config.hostmanager.enabled = true
-      config.hostmanager.manage_host = true
-      config.hostmanager.manage_guest = true
-      config.hostmanager.ignore_private_ip = false
-      config.hostmanager.include_offline = true
+      if Vagrant.has_plugin?('vagrant-hostmanager')
+        config.hostmanager.enabled = true
+        config.hostmanager.manage_host = true
+        config.hostmanager.manage_guest = true
+        config.hostmanager.ignore_private_ip = false
+        config.hostmanager.include_offline = true
+      end
       config.vm.define hostname do |node|
         node.vm.box = node_configs.fetch('box')
         node.vm.box_url = node_configs.fetch('box_url')
@@ -66,8 +69,8 @@ Vagrant.configure("2") do |config|
         node.vm.provision "file", source: "./files/id_rsa", destination: "$HOME/.ssh/id_rsa"
         node.vm.provision "file", source: "./files/id_rsa.pub", destination: "$HOME/.ssh/id_rsa.pub"
         node.vm.provision "shell", path: "scripts/setup-user-passwordless.sh"
-
-        node_ip = IPAddr.new(node_ip.to_i + i - 1, Socket::AF_INET)
+        node_ip = IPAddr.new(node_ip.to_i + idx, Socket::AF_INET)
+        idx = idx + 1
       end
     end
   end
