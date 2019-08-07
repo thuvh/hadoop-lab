@@ -16,7 +16,6 @@ node_ip = IPAddr.new(configs.fetch('ip').fetch('node'))
 roles = configs.fetch('roles')
 prefix = node_configs.fetch('prefix')
 domain = node_configs.fetch('domain')
-idx = 0
 
 Vagrant.configure("2") do |config|
   roles.each do |role|
@@ -69,8 +68,7 @@ Vagrant.configure("2") do |config|
         node.vm.provision "file", source: "./files/id_rsa", destination: "$HOME/.ssh/id_rsa"
         node.vm.provision "file", source: "./files/id_rsa.pub", destination: "$HOME/.ssh/id_rsa.pub"
         node.vm.provision "shell", path: "scripts/setup-user-passwordless.sh"
-        node_ip = IPAddr.new(node_ip.to_i + idx, Socket::AF_INET)
-        idx = idx + 1
+        node_ip = IPAddr.new(node_ip.to_i + 1, Socket::AF_INET)
       end
     end
   end
