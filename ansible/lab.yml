@@ -6,4 +6,7 @@
      add_user: true
   roles:
     - user
+    - disk
+    - ntp
     - java
+

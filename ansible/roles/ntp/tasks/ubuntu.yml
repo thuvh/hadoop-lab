@@ -1,0 +1,22 @@
+---
+- name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+- name: Upgrade all packages to the latest version
+  apt:
+    upgrade: true
+    state: latest
+  become: yes
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+  become: yes
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  become: yes
+- name: install ntp
+  apt: name=ntp state=present update_cache=yes
+  become: yes

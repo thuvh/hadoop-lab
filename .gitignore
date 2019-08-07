@@ -11,5 +11,5 @@ crash.log
 # terraform.tvars
 terraform.tfvars
 
-files/id_rsa
+id_rsa
 

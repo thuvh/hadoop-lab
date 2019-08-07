@@ -1,0 +1,18 @@
+---
+- include: ubuntu.yml
+  when: ansible_os_family == 'Debian'
+- name: Make sure a service ntp is stopped
+  systemd:
+    state: stopped
+    name: ntp
+  become: yes
+- name: enable service ntp
+  systemd:
+    name: ntp
+    enabled: yes
+  become: yes
+- name: Make sure a service ntp is started
+  systemd:
+    state: started
+    name: ntp
+  become: yes

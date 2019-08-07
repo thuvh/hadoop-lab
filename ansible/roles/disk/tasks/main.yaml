@@ -1,0 +1,30 @@
+- name: create data partition
+  parted:
+    device: /dev/sdb
+    align: optimal
+    label: gpt
+    name: gpt
+    number: 1
+    state: present
+  become: yes
+- name: create filesystem data partition
+  filesystem:
+    fstype: ext4
+    dev: /dev/sdb1
+  become: yes
+- name: mount data partition
+  mount:
+    path: /data
+    src: /dev/sdb1
+    fstype: ext4
+    opts: defaults,noatime
+    state: present
+  become: yes
+- name: create data directory
+  file:
+   path: /data/hadoop
+   state: directory
+   mode: 0755
+   group: "{{ user }}"
+   owner: "{{ user }}"
+  become: yes
