@@ -1,3 +1,7 @@
 ---
-- include: ubuntu.yml
-  when: ansible_os_family == 'Debian'
+- name: remove 127.0.1.1
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1'
+    state: absent
+  become: yes
