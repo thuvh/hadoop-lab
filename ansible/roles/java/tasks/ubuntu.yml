@@ -18,8 +18,7 @@
     autoremove: yes
   become: yes
 - name: Install OpenJdk.
-  apt: name={{ item }} state=present update_cache=yes
-  with_items: "{{ java_packages }}"
+  apt: name={{ java_packages }} state=present update_cache=yes
   become: yes
 - name: Copy Java Home Script
   template: src=java_home.sh dest=/etc/profile.d

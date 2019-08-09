@@ -17,6 +17,10 @@
   apt:
     autoremove: yes
   become: yes
-- name: install ntp
-  apt: name=ntp state=present update_cache=yes
+- name: install packages
+  apt: 
+    name: "{{ item }}" 
+    state: present 
+    update_cache: yes
+  with_items: "{{ packages }}"
   become: yes

@@ -1,0 +1,6 @@
+---
+- name: update profile in home
+  template:
+    src: _profile.j2
+    dest: "/home/{{ user }}/.profile"
+  remote_user: "{{ user }}"

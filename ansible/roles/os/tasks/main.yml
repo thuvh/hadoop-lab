@@ -16,3 +16,12 @@
     state: started
     name: ntp
   become: yes
+- name: link gtar to tar
+  file:
+    src: /bin/tar
+    dest: /bin/gtar
+    owner: root
+    group: root
+    state: link
+    mode: '0755'
+  become: yes

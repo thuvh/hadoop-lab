@@ -3,11 +3,13 @@
    - vars/user.yml
    - vars/var_basic.yml
   vars:
-     add_user: true
+    add_user: true
   roles:
     - user
+    - profile
     - disk
     - hosts
-    - ntp
+    - os
     - java
+    - hadoop
 

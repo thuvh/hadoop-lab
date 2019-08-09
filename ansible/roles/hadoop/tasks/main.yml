@@ -1,0 +1,35 @@
+---
+# - name: check folder
+#   debug:
+#     msg: /home/"{{ user }}"/"{{ item }}"
+#   with_items:
+#     - archives
+#     - conf
+#   remote_user: "{{ user }}"
+- name: create folder
+  file:
+    path: "/home/{{ user }}/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  with_items:
+    - "{{ packages_directory }}"
+    - "{{ conf_directory }}"
+    - "{{ opt_directory }}"
+  remote_user: "{{ user }}"
+- name: upload software
+  copy:
+    src: "files/{{ item }}"
+    dest: "/home/{{ user }}/{{ packages_directory }}"
+  with_items: "{{ hadoop_packages }}"
+  remote_user: "{{ user }}"
+- name: extract software
+  unarchive:
+    src: "$HOME/{{ packages_directory }}/{{ item }}"
+    dest: "{{ opt_directory }}"
+    remote_src: yes
+    extra_opts: 
+      - --strip-components=1
+  with_items: "{{ hadoop_packages }}"
+  remote_user: "{{ user }}"

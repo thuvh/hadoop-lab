@@ -1,8 +1,42 @@
 ---
 packages:
  - "ntp"
+ - "unzip"
 
 # java version
 jvm_home: "/usr/lib/jvm"
 java_packages:
- - "openjdk-8-jdk"
+ - "openjdk-8-jdk" 
+
+packages_directory: archives
+conf_directory: conf
+opt_directory: opt
+
+hadoop_package: hadoop-3.1.2.tar.gz
+hive_package: apache-hive-3.1.1-bin.tar.gz
+spark_package: spark-2.4.3-bin-hadoop2.7.tgz
+
+hadoop_packages:
+  - "{{ hadoop_package }}"
+  - "{{ spark_package }}"
+  - "{{ hive_package }}"
+
+hadoop_home: "$HOME/{{ opt_directory }}/hadoop-3.1.2"
+hive_home: "$HOME/{{ opt_directory }}/apache-hive-3.1.1-bin"
+spark_home: "$HOME/{{ opt_directory }}/spark-2.4.3-bin-hadoop2.7"
+
+hadoop_homes:
+  - "{{ hadoop_home }}"
+  - "{{ spark_home }}"
+  - "{{ hive_home }}"
+
+hadoop_unarchives:
+  -
+    package: "{{ hadoop_package }}"
+    dst: "{{ hadoop_home }}"
+  -
+    package: "{{ hive_package }}"
+    dst: "{{ hive_home }}"
+  -
+    package: "{{ spark_package }}"
+    dst: "{{ spark_home }}"
