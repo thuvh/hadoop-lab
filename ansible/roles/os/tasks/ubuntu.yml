@@ -6,7 +6,7 @@
   become: yes
 - name: Upgrade all packages to the latest version
   apt:
-    upgrade: true
+    upgrade: yes
     state: latest
   become: yes
 - name: Remove useless packages from the cache
@@ -19,8 +19,7 @@
   become: yes
 - name: install packages
   apt: 
-    name: "{{ item }}" 
+    name: "{{ packages }}" 
     state: present 
     update_cache: yes
-  with_items: "{{ packages }}"
   become: yes

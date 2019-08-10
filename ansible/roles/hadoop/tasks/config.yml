@@ -1,0 +1,15 @@
+---
+- name: create hadoop config file
+  template:
+    src: "{{ item.template }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ hadoop_conf_files }}"
+  remote_user: "{{ user }}"
+- name: link hadoop config file
+  file:
+    src: "{{ item.dest }}"
+    dest: "{{ hadoop_home }}/etc/hadoop/{{ item.name }}"
+    state: link
+    force: yes
+  with_items: "{{ hadoop_conf_files }}"
+  remote_user: "{{ user }}"

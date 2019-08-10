@@ -1,4 +1,5 @@
 ---
+domain: thuvh.local
 packages:
  - "ntp"
  - "unzip"
@@ -12,6 +13,9 @@ packages_directory: archives
 conf_directory: conf
 opt_directory: opt
 
+hadoop_user: hdfs
+hadoop_group: hdfs
+
 hadoop_package: hadoop-3.1.2.tar.gz
 hive_package: apache-hive-3.1.1-bin.tar.gz
 spark_package: spark-2.4.3-bin-hadoop2.7.tgz
@@ -21,9 +25,9 @@ hadoop_packages:
   - "{{ spark_package }}"
   - "{{ hive_package }}"
 
-hadoop_home: "$HOME/{{ opt_directory }}/hadoop-3.1.2"
-hive_home: "$HOME/{{ opt_directory }}/apache-hive-3.1.1-bin"
-spark_home: "$HOME/{{ opt_directory }}/spark-2.4.3-bin-hadoop2.7"
+hadoop_home: "/home/{{ hadoop_user }}/{{ opt_directory }}/hadoop-3.1.2"
+hive_home: "/home/{{ hadoop_user }}/{{ opt_directory }}/apache-hive-3.1.1-bin"
+spark_home: "/home/{{ hadoop_user }}/{{ opt_directory }}/spark-2.4.3-bin-hadoop2.7"
 
 hadoop_homes:
   - "{{ hadoop_home }}"
@@ -40,3 +44,36 @@ hadoop_unarchives:
   -
     package: "{{ spark_package }}"
     dst: "{{ spark_home }}"
+
+hadoop_data: /data/hadoop/
+
+hadoop_conf_files:
+  -
+    name: core-site.xml
+    template: core-site.xml.j2
+    dest: "/home/{{ user }}/{{ conf_directory }}/core-site.xml"
+  -
+    name: hdfs-site.xml
+    template: hdfs-site.xml.j2
+    dest: "/home/{{ user }}/{{ conf_directory }}/hdfs-site.xml"
+  -
+    name: yarn-site.xml
+    template: yarn-site.xml.j2
+    dest: "/home/{{ user }}/{{ conf_directory }}/yarn-site.xml"
+
+hadoop_conf:
+  namenode:
+    host: "nn01.{{ domain }}"
+    port: 8092
+  dfs:
+    blocksize: 134217728  
+  yarn:
+    log_aggregation_enable: false
+    resourcemanager:
+      hostname: "rs01.{{ domain }}"
+    scheduler:
+      minimum_allocation_mb: 1024
+      maximum_allocation_mb: 4096
+    nodemanager:
+      resource:
+        memory_mb: 8192

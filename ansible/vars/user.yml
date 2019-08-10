@@ -1,3 +1,3 @@
 ---
-user: "hdfs"
-group: "hdfs"
+user: "{{ hadoop_user }}"
+group: "{{ hadoop_group }}"
