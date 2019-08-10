@@ -1,18 +1,18 @@
 ---
 - name: format namenode (force)
-  command: "{{ hadoop_home }}/bin/hdfs namenode -format -force"
+  shell: "{{ hadoop_home }}/bin/hdfs namenode -format -force"
   args:
     chdir: "{{ hadoop_home }}"
   remote_user: "{{ hadoop_user }}"
   when: namenode_format
 - name: start namenode
-  command: "{{ hadoop_home }}/bin/hdfs --daemon start namenode"
+  shell: "{{ hadoop_home }}/bin/hdfs --daemon start namenode"
   args:
     chdir: "{{ hadoop_home }}"
   remote_user: "{{ hadoop_user }}"
   when: namenode_start
 - name: stop namenode
-  command: "{{ hadoop_home }}/bin/hdfs --daemon stop namenode"
+  shell: "{{ hadoop_home }}/bin/hdfs --daemon stop namenode"
   args:
     chdir: "{{ hadoop_home }}"
   remote_user: "{{ hadoop_user }}"
