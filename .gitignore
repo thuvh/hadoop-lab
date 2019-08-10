@@ -11,5 +11,7 @@ crash.log
 # terraform.tvars
 terraform.tfvars
 
+.vagrant
+
 id_rsa
 

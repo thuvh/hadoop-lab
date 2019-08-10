@@ -1,19 +1,22 @@
 ---
 - name: format namenode (force)
-  shell: "{{ hadoop_home }}/bin/hdfs namenode -format -force"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs namenode -format -force"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: namenode_format
 - name: start namenode
-  shell: "{{ hadoop_home }}/bin/hdfs --daemon start namenode"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon start namenode"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: namenode_start
 - name: stop namenode
-  shell: "{{ hadoop_home }}/bin/hdfs --daemon stop namenode"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon stop namenode"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: namenode_stop

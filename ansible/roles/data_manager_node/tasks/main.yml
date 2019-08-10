@@ -1,25 +1,32 @@
 ---
 - name: start datanode
-  shell: "{{ hadoop_home }}/bin/hdfs --daemon start datanode"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon start datanode"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: datanode_start
+
 - name: stop datanode
-  shell: "{{ hadoop_home }}/bin/hdfs --daemon stop datanode"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon stop datanode"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: datanode_stop
+
 - name: start node manager
-  shell: "{{ hadoop_home }}/bin/yarn --daemon start nodemanager"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/yarn --daemon start nodemanager"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: nodemanager_start
+
 - name: stop node manager
-  shell: "{{ hadoop_home }}/bin/yarn --daemon stop nodemanager"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/yarn --daemon stop nodemanager"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: nodemanager_stop

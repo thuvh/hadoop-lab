@@ -1,13 +1,16 @@
 ---
 - name: start history server
-  shell: "{{ hadoop_home }}/bin/mapred --daemon start historyserver"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/mapred --daemon start historyserver"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: history_server_start
+
 - name: stop history server
-  shell: "{{ hadoop_home }}/bin/mapred --daemon stop historyserver"
+  shell: /bin/bash -lc "{{ hadoop_home }}/bin/mapred --daemon stop historyserver"
   args:
     chdir: "{{ hadoop_home }}"
+    executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: history_server_stop
