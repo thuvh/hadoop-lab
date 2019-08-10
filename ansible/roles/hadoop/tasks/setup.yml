@@ -29,7 +29,7 @@
     owner: "{{ hadoop_user }}"
     group: "{{ hadoop_user }}"
     recurse: yes
-  remote_user: "{{ hadoop_user }}"
+  become: yes
 - name: upload hadoop software
   copy:
     src: "files/{{ item }}"
