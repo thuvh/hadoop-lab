@@ -19,6 +19,6 @@
 <configuration>
   <property>
     <name>dfs.blocksize</name>
-    <value>"{{ hadoop_conf.dfs.blocksize | default(268435456) }}"</value>
+    <value>{{ hadoop_conf.dfs.blocksize | default(268435456) }}</value>
   </property>
 </configuration>

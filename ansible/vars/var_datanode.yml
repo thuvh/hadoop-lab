@@ -1,3 +1,0 @@
----
-master_ip: "{{ master_ip }}"
-master_hostname: "{{ master_hostname }}"

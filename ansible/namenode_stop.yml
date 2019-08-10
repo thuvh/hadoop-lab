@@ -1,0 +1,10 @@
+---
+- hosts: namenode 
+  vars_files:
+   - vars/var_basic.yml
+  vars:
+    namenode_format: false
+    namenode_start: false
+    namenode_stop: true
+  roles:
+    - namenode

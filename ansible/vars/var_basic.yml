@@ -51,15 +51,19 @@ hadoop_conf_files:
   -
     name: core-site.xml
     template: core-site.xml.j2
-    dest: "/home/{{ user }}/{{ conf_directory }}/core-site.xml"
+    dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/core-site.xml"
   -
     name: hdfs-site.xml
     template: hdfs-site.xml.j2
-    dest: "/home/{{ user }}/{{ conf_directory }}/hdfs-site.xml"
+    dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/hdfs-site.xml"
   -
     name: yarn-site.xml
     template: yarn-site.xml.j2
-    dest: "/home/{{ user }}/{{ conf_directory }}/yarn-site.xml"
+    dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/yarn-site.xml"
+  -
+    name: mapred-site.xml
+    template: mapred-site.xml.j2
+    dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/mapred-site.xml"
 
 hadoop_conf:
   namenode:
@@ -77,3 +81,7 @@ hadoop_conf:
     nodemanager:
       resource:
         memory_mb: 8192
+  mapreduce:
+    jobhistory:
+      address: "hs01.{{ domain }}"
+

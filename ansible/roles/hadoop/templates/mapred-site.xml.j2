@@ -18,11 +18,7 @@
 
 <configuration>
   <property>
-    <name>fs.default.name</name>
-    <value>hdfs://{{ hadoop_conf.namenode.host }}:{{ hadoop_conf.namenode.port }}</value>
+    <name>mapreduce.jobhistory.address</name>
+    <value>{{ hadoop_conf.mapreduce.jobhistory.address }}</value>
   </property>
-  <property>
-    <name>hadoop.tmp.dir</name>
-    <value>{{ hadoop_data }}</value>
-  </property>  
 </configuration>

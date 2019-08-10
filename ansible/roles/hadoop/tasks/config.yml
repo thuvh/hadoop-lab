@@ -4,7 +4,7 @@
     src: "{{ item.template }}"
     dest: "{{ item.dest }}"
   with_items: "{{ hadoop_conf_files }}"
-  remote_user: "{{ user }}"
+  remote_user: "{{ hadoop_user }}"
 - name: link hadoop config file
   file:
     src: "{{ item.dest }}"
@@ -12,4 +12,4 @@
     state: link
     force: yes
   with_items: "{{ hadoop_conf_files }}"
-  remote_user: "{{ user }}"
+  remote_user: "{{ hadoop_user }}"

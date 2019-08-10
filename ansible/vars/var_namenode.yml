@@ -1,3 +1,0 @@
----
-namenode_ip: "{{ ansible_host }}"
-namenode_hostname: "{{ ansible_hostname }}"

@@ -1,0 +1,25 @@
+---
+- name: start datanode
+  command: "{{ hadoop_home }}/bin/hdfs --daemon start datanode"
+  args:
+    chdir: "{{ hadoop_home }}"
+  remote_user: "{{ hadoop_user }}"
+  when: datanode_start
+- name: stop datanode
+  command: "{{ hadoop_home }}/bin/hdfs --daemon stop datanode"
+  args:
+    chdir: "{{ hadoop_home }}"
+  remote_user: "{{ hadoop_user }}"
+  when: datanode_stop
+- name: start node manager
+  command: "{{ hadoop_home }}/bin/yarn --daemon start nodemanager"
+  args:
+    chdir: "{{ hadoop_home }}"
+  remote_user: "{{ hadoop_user }}"
+  when: nodemanager_start
+- name: stop node manager
+  command: "{{ hadoop_home }}/bin/yarn --daemon stop nodemanager"
+  args:
+    chdir: "{{ hadoop_home }}"
+  remote_user: "{{ hadoop_user }}"
+  when: nodemanager_stop

@@ -19,7 +19,7 @@
 <configuration>
   <property>
     <name>yarn.log-aggregation-enable</name>
-    <value>"{{ hadoop_conf.yarn.log_aggregation_enable }}"</value>
+    <value>{{ hadoop_conf.yarn.log_aggregation_enable | to_json }}</value>
   </property>
   <property>
     <name>yarn.resourcemanager.hostname</name>
@@ -27,14 +27,14 @@
   </property>
   <property>
     <name>yarn.scheduler.minimum-allocation-mb</name>
-    <value>"{{ hadoop_conf.yarn.scheduler.minimum_allocation_mb }}"</value>
+    <value>{{ hadoop_conf.yarn.scheduler.minimum_allocation_mb }}</value>
   </property>
   <property>
     <name>yarn.scheduler.maximum-allocation-mb</name>
-    <value>"{{ hadoop_conf.yarn.scheduler.maximum_allocation_mb }}"</value>
+    <value>{{ hadoop_conf.yarn.scheduler.maximum_allocation_mb }}</value>
   </property>
   <property>
     <name>yarn.nodemanager.resource.memory-mb</name>
-    <value>"{{ hadoop_conf.yarn.nodemanager.resource.memory_mb }}"</value>
+    <value>{{ hadoop_conf.yarn.nodemanager.resource.memory_mb }}</value>
   </property>
 </configuration>

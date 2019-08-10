@@ -1,0 +1,13 @@
+---
+- name: start resource manager
+  command: "{{ hadoop_home }}/bin/yarn --daemon start resourcemanager"
+  args:
+    chdir: "{{ hadoop_home }}"
+  remote_user: "{{ hadoop_user }}"
+  when: resourcemanager_start
+- name: stop resource manager
+  command: "{{ hadoop_home }}/bin/yarn --daemon stop resourcemanager"
+  args:
+    chdir: "{{ hadoop_home }}"
+  remote_user: "{{ hadoop_user }}"
+  when: resourcemanager_stop
