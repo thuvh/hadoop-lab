@@ -1,5 +1,5 @@
 ---
-- hosts: all 
+- hosts: namenode, resourcemanager, datanodes, historyserver
   vars_files:
    - vars/user.yml
    - vars/var_basic.yml
@@ -40,3 +40,11 @@
     nodemanager_stop: false
   roles:
     - data_manager_node
+- hosts: historyserver
+  vars_files:
+    - vars/var_basic.yml
+  vars:
+    history_server_start: true
+    history_server_stop: false
+  roles:
+    history_server
