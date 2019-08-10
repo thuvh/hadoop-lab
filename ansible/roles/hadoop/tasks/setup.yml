@@ -18,7 +18,6 @@
     mode: '0755'
     owner: "{{ hadoop_user }}"
     group: "{{ hadoop_user }}"
-    recurse: yes
   with_items: "{{ hadoop_homes }}"
   remote_user: "{{ hadoop_user }}"
 - name: create hadoop data home
@@ -28,7 +27,6 @@
     mode: '0755'
     owner: "{{ hadoop_user }}"
     group: "{{ hadoop_user }}"
-    recurse: yes
   become: yes
 - name: upload hadoop software
   copy:
