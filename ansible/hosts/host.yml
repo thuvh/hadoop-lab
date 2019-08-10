@@ -3,72 +3,72 @@ all:
     namenode:
       hosts:
         nn01:
-          ansible_host: 192.168.56.150
+          ansible_host: nn01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     secondary_namenode:
       hosts:
         sn01:
-          ansible_host: 192.168.56.151
+          ansible_host: sn01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     datanodes:
       hosts:
         dn01:
-          ansible_host: 192.168.56.152
+          ansible_host: dn01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
         dn02:
-          ansible_host: 192.168.56.153
+          ansible_host: dn02.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
         dn03:
-          ansible_host: 192.168.56.154
+          ansible_host: dn03.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     resourcemanager:
       hosts:
         rs01:
-          ansible_host: 192.168.56.155
+          ansible_host: rs01.thuhv.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     proxyserver:
       hosts:
         wp01:
-          ansible_host: 192.168.56.156
+          ansible_host: wp01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     sparkmaster:
       hosts:
         sm01:
-          ansible_host: 192.168.56.157
+          ansible_host: sm01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     timelineserver:
       hosts:
         ts01:
-          ansible_host: 192.168.56.158
+          ansible_host: ts01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     historyserver:
       hosts:
         hs01:
-          ansible_host: 192.168.56.159
+          ansible_host: hs01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     db:
       hosts:
         ps01:
-          ansible_host: 192.168.56.160
+          ansible_host: ps01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
         ps02:
-          ansible_host: 192.168.56.161
+          ansible_host: ps02.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     lab:
       hosts:
         lab01:
-          ansible_host: 192.168.56.150
+          ansible_host: lab01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
