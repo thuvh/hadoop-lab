@@ -47,4 +47,4 @@
     history_server_start: true
     history_server_stop: false
   roles:
-    history_server
+    - history_server
