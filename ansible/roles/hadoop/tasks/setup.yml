@@ -10,6 +10,7 @@
     - "{{ packages_directory }}"
     - "{{ conf_directory }}"
     - "{{ opt_directory }}"
+  remote_user: "{{ hadoop_user }}"
 - name: create hadoop package home
   file:
     path: "{{ item }}"
