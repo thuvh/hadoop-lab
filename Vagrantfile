@@ -72,7 +72,11 @@ Vagrant.configure("2") do |config|
         node.vm.provision "file", source: "./files/passwordless", destination: "$HOME/passwordless"
         node.vm.provision "file", source: "./files/id_rsa", destination: "$HOME/.ssh/id_rsa"
         node.vm.provision "file", source: "./files/id_rsa.pub", destination: "$HOME/.ssh/id_rsa.pub"
+        node.vm.provision "file", source: "./files/99-ipv6-thuvh.conf", destination: "~/"
+        node.vm.provision "file", source: "./files/99-swappiness.conf", destination: "~/"
         node.vm.provision "shell", path: "scripts/setup-user-passwordless.sh"
+        node.vm.provision "shell", path: "scripts/setup-swappiness.sh"
+        node.vm.provision "shell", path: "scripts/setup-ipv6-disabled.sh"
         node_ip = IPAddr.new(node_ip.to_i + 1, Socket::AF_INET)
       end
     end
