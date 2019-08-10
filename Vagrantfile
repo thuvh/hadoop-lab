@@ -32,6 +32,11 @@ Vagrant.configure("2") do |config|
         config.hostmanager.ignore_private_ip = false
         config.hostmanager.include_offline = true
       end
+
+      config.ssh.insert_key = false
+      config.ssh.private_key_path = ["files/id_rsa", "~/.vagrant.d/insecure_private_key"]
+      config.vm.provision "file", source: "files/id_rsa.pub", destination: "~/.ssh/authorized_keys"
+
       config.vm.define hostname do |node|
         node.vm.box = node_configs.fetch('box')
         node.vm.box_url = node_configs.fetch('box_url')
