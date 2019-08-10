@@ -29,7 +29,7 @@ all:
     resourcemanager:
       hosts:
         rs01:
-          ansible_host: rs01.thuhv.local
+          ansible_host: rs01.thuvh.local
           ansible_python_interpreter: /usr/bin/python3
           ansible_ssh_private_key_file: files/id_rsa
     proxyserver:
