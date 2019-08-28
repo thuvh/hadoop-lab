@@ -50,6 +50,8 @@ node:
   memory: 4096
   prefix: hadoop
   domain: thuvh.local
+  ansible_python_interpreter: /usr/bin/python3
+  ansible_ssh_private_key_file: files/id_rsa
 net:
   private_nic_type: 82545EM
   network_type: private_network
