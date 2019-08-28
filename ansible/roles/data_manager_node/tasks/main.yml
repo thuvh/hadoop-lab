@@ -23,7 +23,7 @@
 - name: start datanode
   supervisorctl:
     name: datanode
-    state: restarted
+    state: start
   become: yes
   when: datanode_start
 
@@ -37,7 +37,7 @@
 - name: start nodemanager
   supervisorctl:
     name: nodemanager
-    state: restarted
+    state: start
   become: yes
   when: nodemanager_start
 

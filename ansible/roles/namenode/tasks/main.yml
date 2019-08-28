@@ -25,7 +25,7 @@
 - name: start namenode
   supervisorctl:
     name: namenode
-    state: restarted
+    state: start
   become: yes
   when: namenode_start
 
