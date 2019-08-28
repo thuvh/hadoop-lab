@@ -1,15 +1,29 @@
 ---
-- name: start resource manager
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/yarn --daemon start resourcemanager"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+- name: Template a file to /etc/files.conf
+  template:
+    src: hadoop.conf.j2
+    dest: /etc/supervisor/conf.d/hadoop.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: update supervisort config for resourcemanager
+  supervisorctl:
+    name: resourcemanager
+    state: present
+  become: yes
+
+- name: start resourcemanager
+  supervisorctl:
+    name: resourcemanager
+    state: restarted
+  become: yes
   when: resourcemanager_start
-- name: stop resource manager
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/yarn --daemon stop resourcemanager"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+
+- name: stop resourcemanager
+  supervisorctl:
+    name: resourcemanager
+    state: stopped
+  become: yes
   when: resourcemanager_stop

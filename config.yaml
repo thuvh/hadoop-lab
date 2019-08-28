@@ -1,44 +1,54 @@
 roles:
   -
+    name: namenode
     count: 1
     hostname_template: nn%02i
     description: namenode
     enabled: false
   -
+    name: secondary_namenode
     count: 1
     hostname_template: sn%02i
     description: secondary namenode
     cpus: 2
     memory: 6144
   -
+    name: datanodes
     count: 3
     hostname_template: dn%02i
     description: datanode
   -
+    name: resourcemanager
     count: 1
     hostname_template: rs%02i
     description: resource manager
   -
+    name: proxyserver
     count: 1
     hostname_template: wp%02i
-    description: proxy 
+    description: proxy
   -
+    name: sparkmaster
     count: 1
     hostname_template: sm%02i
     description: spark master
   -
+    name: timelineserver
     count: 1
     hostname_template: ts%02i
     description: timeline server
   -
+    name: historyserver
     count: 1
     hostname_template: hs%02i
     description: history server
   -
+    name: db
     count: 2
     hostname_template: ps%02i
     description: postgresql
   -
+    name: lab
     count: 1
     hostname_template: lab%02i
     description: lab

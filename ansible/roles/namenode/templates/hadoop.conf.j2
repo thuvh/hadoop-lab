@@ -1,0 +1,12 @@
+[program:namenode]
+command={{ hadoop_home }}/bin/hdfs start namenode
+process_name=%(program_name)s
+numprocs=1
+directory={{ hadoop_home }}
+autostart=true
+autorestart=true
+startsecs=10
+startretries=3
+user={{ hadoop_user }}
+redirect_stderr=true
+stdout_logfile=/var/log/hadoop/job-namenode.log

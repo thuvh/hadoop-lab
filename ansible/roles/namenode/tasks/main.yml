@@ -6,17 +6,32 @@
     executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: namenode_format
+
+- name: Template a file to /etc/files.conf
+  template:
+    src: hadoop.conf.j2
+    dest: /etc/supervisor/conf.d/hadoop.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: update supervisort config for namenode
+  supervisorctl:
+    name: namenode
+    state: present
+  become: yes
+
 - name: start namenode
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon start namenode"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+  supervisorctl:
+    name: namenode
+    state: restarted
+  become: yes
   when: namenode_start
+
 - name: stop namenode
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon stop namenode"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+  supervisorctl:
+    name: namenode
+    state: stopped
+  become: yes
   when: namenode_stop

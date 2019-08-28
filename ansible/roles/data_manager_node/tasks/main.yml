@@ -1,32 +1,49 @@
 ---
+- name: Template a file to /etc/files.conf
+  template:
+    src: hadoop.conf.j2
+    dest: /etc/supervisor/conf.d/hadoop.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: update supervisort config for datanode
+  supervisorctl:
+    name: datanode
+    state: present
+  become: yes
+
+- name: update supervisort config for nodemanager
+  supervisorctl:
+    name: nodemanager
+    state: present
+  become: yes
+
 - name: start datanode
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon start datanode"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+  supervisorctl:
+    name: datanode
+    state: restarted
+  become: yes
   when: datanode_start
 
 - name: stop datanode
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs --daemon stop datanode"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+  supervisorctl:
+    name: datanode
+    state: stopped
+  become: yes
   when: datanode_stop
 
-- name: start node manager
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/yarn --daemon start nodemanager"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+- name: start nodemanager
+  supervisorctl:
+    name: nodemanager
+    state: restarted
+  become: yes
   when: nodemanager_start
 
-- name: stop node manager
-  shell: /bin/bash -lc "{{ hadoop_home }}/bin/yarn --daemon stop nodemanager"
-  args:
-    chdir: "{{ hadoop_home }}"
-    executable: /bin/bash
-  remote_user: "{{ hadoop_user }}"
+- name: stop nodemanager
+  supervisorctl:
+    name: nodemanager
+    state: stopped
+  become: yes
   when: nodemanager_stop

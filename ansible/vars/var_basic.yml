@@ -3,11 +3,13 @@ domain: thuvh.local
 packages:
  - "ntp"
  - "unzip"
+ - "htop"
+ - "supervisor"
 
 # java version
 jvm_home: "/usr/lib/jvm"
 java_packages:
- - "openjdk-8-jdk" 
+ - "openjdk-8-jdk"
 
 packages_directory: archives
 conf_directory: conf
@@ -70,7 +72,7 @@ hadoop_conf:
     host: "nn01.{{ domain }}"
     port: 8092
   dfs:
-    blocksize: 134217728  
+    blocksize: 134217728
   yarn:
     log_aggregation_enable: false
     resourcemanager:

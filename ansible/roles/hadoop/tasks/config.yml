@@ -5,6 +5,7 @@
     dest: "{{ item.dest }}"
   with_items: "{{ hadoop_conf_files }}"
   remote_user: "{{ hadoop_user }}"
+
 - name: link hadoop config file
   file:
     src: "{{ item.dest }}"
@@ -13,3 +14,21 @@
     force: yes
   with_items: "{{ hadoop_conf_files }}"
   remote_user: "{{ hadoop_user }}"
+
+- name: make directory for log
+  file:
+    path: "{{ hadoop_home }}/logs"
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_group }}"
+    mode: '0755'
+    state: 'directory'
+  remote_user: "{{ hadoop_user }}"
+
+- name: make directory for log
+  file:
+    src: "{{ hadoop_home }}/logs"
+    dest: /var/log/hadoop
+    owner: "{{ hadoop_user }}"
+    mode: '0755'
+    state: 'link'
+  become: yes

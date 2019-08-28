@@ -1,16 +1,16 @@
 ---
-- hosts: lab01 
+- hosts: lab01
   vars_files:
    - vars/user.yml
    - vars/var_basic.yml
   vars:
     add_user: true
   roles:
-    # - user
-    # - profile
-    # - disk
-    # - hosts
-    # - os
-    # - java
+    - user
+    - profile
+    - disk
+    - hosts
+    - os
+    - java
     - hadoop
 
