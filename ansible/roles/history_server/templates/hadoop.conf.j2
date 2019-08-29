@@ -1,5 +1,5 @@
 [program:historyserver]
-command={{ hadoop_home }}/bin/mapred start historyserver
+command={{ hadoop_home }}/bin/mapred historyserver
 process_name=%(program_name)s
 numprocs=1
 directory={{ hadoop_home }}

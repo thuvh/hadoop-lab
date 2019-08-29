@@ -1,5 +1,5 @@
 [program:resourcemanager]
-command={{ hadoop_home }}/bin/yarn start resourcemanager
+command={{ hadoop_home }}/bin/yarn resourcemanager
 process_name=%(program_name)s
 numprocs=1
 directory={{ hadoop_home }}

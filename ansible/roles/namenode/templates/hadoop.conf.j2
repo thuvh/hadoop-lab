@@ -1,5 +1,5 @@
 [program:namenode]
-command={{ hadoop_home }}/bin/hdfs start namenode
+command={{ hadoop_home }}/bin/hdfs namenode
 process_name=%(program_name)s
 numprocs=1
 directory={{ hadoop_home }}

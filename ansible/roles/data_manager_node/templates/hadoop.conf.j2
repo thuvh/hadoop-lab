@@ -1,5 +1,5 @@
 [program:datanode]
-command={{ hadoop_home }}/bin/hdfs start datanode
+command={{ hadoop_home }}/bin/hdfs datanode
 process_name=%(program_name)s
 numprocs=1
 directory={{ hadoop_home }}
@@ -12,7 +12,7 @@ redirect_stderr=true
 stdout_logfile=/var/log/hadoop/job-datanode.log
 
 [program:nodemanager]
-command={{ hadoop_home }}/bin/yarn start nodemanager
+command={{ hadoop_home }}/bin/yarn nodemanager
 process_name=%(program_name)s
 numprocs=1
 directory={{ hadoop_home }}
