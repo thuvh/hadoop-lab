@@ -24,14 +24,14 @@
   notify:
     - update supervisorctl config file
 
-- name: update supervisort config for datanode
+- name: start datanode
   supervisorctl:
     name: datanode
     state: started
   become: yes
   ignore_errors: yes
 
-- name: update supervisort config for nodemanager
+- name: start nodemanager
   supervisorctl:
     name: nodemanager
     state: started
