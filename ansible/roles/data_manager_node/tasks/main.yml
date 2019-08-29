@@ -25,7 +25,7 @@
     state: absent
   become: yes
 
-- name: Template a file to /etc/files.conf
+- name: Template a file to /etc/supervisor/conf.d/hadoop.conf
   template:
     src: hadoop.conf.j2
     dest: /etc/supervisor/conf.d/hadoop.conf
