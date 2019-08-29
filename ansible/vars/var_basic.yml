@@ -87,6 +87,8 @@ hadoop_conf:
     nodemanager:
       resource:
         memory_mb: 8192
+    web-proxy:
+      address: "wp01.{{ domain }}:9046"
   mapreduce:
     jobhistory:
       address: "hs01.{{ domain }}"
