@@ -1,4 +1,11 @@
 ---
+- name: stop namenode
+  supervisorctl:
+    name: namenode
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
 - name: format namenode (force)
   shell: /bin/bash -lc "{{ hadoop_home }}/bin/hdfs namenode -format -force"
   args:
@@ -6,13 +13,6 @@
     executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
   when: namenode_format
-
-- name: stop namenode
-  supervisorctl:
-    name: namenode
-    state: stopped
-  become: yes
-  ignore_errors: yes
 
 - name: Template a file to /etc/supervisor/conf.d/hadoop.conf
   template:
