@@ -1,4 +1,11 @@
 ---
+- name: stop resourcemanager
+  supervisorctl:
+    name: resourcemanager
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
 - name: update supervisorctl config of resourcemanager
   supervisorctl:
     name: resourcemanager
@@ -19,3 +26,10 @@
     name: resourcemanager
     state: present
   become: yes
+
+- name: start resourcemanager
+  supervisorctl:
+    name: resourcemanager
+    state: started
+  become: yes
+  ignore_errors: yes

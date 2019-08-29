@@ -7,6 +7,13 @@
   remote_user: "{{ hadoop_user }}"
   when: namenode_format
 
+- name: stop namenode
+  supervisorctl:
+    name: namenode
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
 - name: remove supervisorctl config of namenode
   supervisorctl:
     name: namenode
@@ -27,3 +34,10 @@
     name: namenode
     state: present
   become: yes
+
+- name: start namenode
+  supervisorctl:
+    name: namenode
+    state: started
+  become: yes
+  ignore_errors: yes

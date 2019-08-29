@@ -1,4 +1,18 @@
 ---
+- name: stop datanode
+  supervisorctl:
+    name: datanode
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
+- name: stop nodemanager
+  supervisorctl:
+    name: nodemanager
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
 - name: update supervisort config of datanode
   supervisorctl:
     name: datanode
@@ -31,3 +45,17 @@
     name: nodemanager
     state: present
   become: yes
+
+- name: update supervisort config for datanode
+  supervisorctl:
+    name: datanode
+    state: started
+  become: yes
+  ignore_errors: yes
+
+- name: update supervisort config for nodemanager
+  supervisorctl:
+    name: nodemanager
+    state: started
+  become: yes
+  ignore_errors: yes

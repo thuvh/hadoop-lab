@@ -1,4 +1,11 @@
 ---
+- name: stop historyserver
+  supervisorctl:
+    name: historyserver
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
 - name: update supervisorctl config of historyserver
   supervisorctl:
     name: historyserver
@@ -19,3 +26,10 @@
     name: historyserver
     state: present
   become: yes
+
+- name: start historyserver
+  supervisorctl:
+    name: historyserver
+    state: started
+  become: yes
+  ignore_errors: yes
