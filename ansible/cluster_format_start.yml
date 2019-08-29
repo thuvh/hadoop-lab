@@ -1,50 +1,39 @@
 ---
-- hosts: namenode, resourcemanager, datanodes, historyserver
+# - hosts: namenode, resourcemanager, datanodes, historyserver
+#   vars_files:
+#    - vars/user.yml
+#    - vars/var_basic.yml
+#   vars:
+#     add_user: true
+#   roles:
+#     - user
+#     - profile
+#     - disk
+#     - hosts
+#     - os
+#     - java
+#     - hadoop
+
+- hosts: namenode
   vars_files:
-   - vars/user.yml
    - vars/var_basic.yml
-  vars:
-    add_user: true
-  roles:
-    - user
-    - profile
-    - disk
-    - hosts
-    - os
-    - java
-    - hadoop
-- hosts: namenode 
-  vars_files:
-   - vars/var_basic.yml
-  vars:
-    namenode_format: true
-    namenode_start: true
-    namenode_stop: false
   roles:
     - namenode
+
 - hosts: resourcemanager
   vars_files:
     - vars/var_basic.yml
-  vars:
-    resourcemanager_start: true
-    resourcemanager_stop: false
   roles:
     - resource_manager
+
 - hosts: datanodes
   vars_files:
     - vars/var_basic.yml
-  vars:
-    datanode_start: true
-    nodemanager_start: true
-    datanode_stop: false
-    nodemanager_stop: false
   roles:
     - data_manager_node
+
 - hosts: historyserver
   vars_files:
     - vars/var_basic.yml
-  vars:
-    history_server_start: true
-    history_server_stop: false
   roles:
     - history_server

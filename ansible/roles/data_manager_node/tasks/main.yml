@@ -1,4 +1,16 @@
 ---
+- name: update supervisort config of datanode
+  supervisorctl:
+    name: datanode
+    state: absent
+  become: yes
+
+- name: update supervisort config for nodemanager
+  supervisorctl:
+    name: nodemanager
+    state: absent
+  become: yes
+
 - name: Template a file to /etc/files.conf
   template:
     src: hadoop.conf.j2
@@ -19,31 +31,3 @@
     name: nodemanager
     state: present
   become: yes
-
-- name: start datanode
-  supervisorctl:
-    name: datanode
-    state: start
-  become: yes
-  when: datanode_start
-
-- name: stop datanode
-  supervisorctl:
-    name: datanode
-    state: stopped
-  become: yes
-  when: datanode_stop
-
-- name: start nodemanager
-  supervisorctl:
-    name: nodemanager
-    state: start
-  become: yes
-  when: nodemanager_start
-
-- name: stop nodemanager
-  supervisorctl:
-    name: nodemanager
-    state: stopped
-  become: yes
-  when: nodemanager_stop

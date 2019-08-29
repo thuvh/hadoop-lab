@@ -1,4 +1,10 @@
 ---
+- name: update supervisorctl config of resourcemanager
+  supervisorctl:
+    name: resourcemanager
+    state: absent
+  become: yes
+
 - name: Template a file to /etc/files.conf
   template:
     src: hadoop.conf.j2
@@ -13,17 +19,3 @@
     name: resourcemanager
     state: present
   become: yes
-
-- name: start resourcemanager
-  supervisorctl:
-    name: resourcemanager
-    state: started
-  become: yes
-  when: resourcemanager_start
-
-- name: stop resourcemanager
-  supervisorctl:
-    name: resourcemanager
-    state: stopped
-  become: yes
-  when: resourcemanager_stop

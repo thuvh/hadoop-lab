@@ -66,6 +66,10 @@ hadoop_conf_files:
     name: mapred-site.xml
     template: mapred-site.xml.j2
     dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/mapred-site.xml"
+  -
+    name: hadoop-env.sh
+    template: hadoop-env.sh.j2
+    dest: /home/{{ hadoop_user }}/{{ conf_directory }}/hadoop-env.sh"
 
 hadoop_conf:
   namenode:

@@ -1,4 +1,10 @@
 ---
+- name: update supervisorctl config of historyserver
+  supervisorctl:
+    name: historyserver
+    state: absent
+  become: yes
+
 - name: Template a file to /etc/files.conf
   template:
     src: hadoop.conf.j2
@@ -13,17 +19,3 @@
     name: historyserver
     state: present
   become: yes
-
-- name: start historyserver
-  supervisorctl:
-    name: historyserver
-    state: start
-  become: yes
-  when: history_server_start
-
-- name: stop historyserver
-  supervisorctl:
-    name: historyserver
-    state: stopped
-  become: yes
-  when: history_server_stop

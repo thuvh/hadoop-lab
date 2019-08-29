@@ -7,6 +7,12 @@
   remote_user: "{{ hadoop_user }}"
   when: namenode_format
 
+- name: remove supervisorctl config of namenode
+  supervisorctl:
+    name: namenode
+    state: absent
+  become: yes
+
 - name: Template a file to /etc/files.conf
   template:
     src: hadoop.conf.j2
@@ -16,22 +22,8 @@
     mode: '0644'
   become: yes
 
-- name: update supervisort config for namenode
+- name: update supervisorctl config of namenode
   supervisorctl:
     name: namenode
     state: present
   become: yes
-
-- name: start namenode
-  supervisorctl:
-    name: namenode
-    state: started
-  become: yes
-  when: namenode_start
-
-- name: stop namenode
-  supervisorctl:
-    name: namenode
-    state: stopped
-  become: yes
-  when: namenode_stop
