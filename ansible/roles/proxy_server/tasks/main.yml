@@ -1,0 +1,25 @@
+---
+- name: stop proxyserver
+  supervisorctl:
+    name: proxyserver
+    state: stopped
+  become: yes
+  ignore_errors: yes
+
+- name: Template a file to /etc/supervisor/conf.d/hadoop.conf
+  template:
+    src: hadoop.conf.j2
+    dest: /etc/supervisor/conf.d/hadoop.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify:
+    - update supervisorctl config file
+
+- name: start proxyserver
+  supervisorctl:
+    name: proxyserver
+    state: started
+  become: yes
+  ignore_errors: yes

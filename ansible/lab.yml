@@ -1,5 +1,5 @@
 ---
-- hosts: lab01
+- hosts: proxyserver
   vars_files:
    - vars/user.yml
    - vars/var_basic.yml
@@ -14,3 +14,10 @@
     - java
     - hadoop
 
+- hosts: proxyserver
+  vars_files:
+   - vars/var_basic.yml
+  vars:
+    namenode_format: true
+  roles:
+    - proxy_server
