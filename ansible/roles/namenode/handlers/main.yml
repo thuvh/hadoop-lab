@@ -1,0 +1,4 @@
+---
+- name: update supervisorctl config file
+  command: supervisorctl update
+  become: yes

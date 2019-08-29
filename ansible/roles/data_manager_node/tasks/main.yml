@@ -13,18 +13,6 @@
   become: yes
   ignore_errors: yes
 
-- name: update supervisort config of datanode
-  supervisorctl:
-    name: datanode
-    state: absent
-  become: yes
-
-- name: update supervisort config for nodemanager
-  supervisorctl:
-    name: nodemanager
-    state: absent
-  become: yes
-
 - name: Template a file to /etc/supervisor/conf.d/hadoop.conf
   template:
     src: hadoop.conf.j2
@@ -33,18 +21,8 @@
     group: root
     mode: '0644'
   become: yes
-
-- name: update supervisort config for datanode
-  supervisorctl:
-    name: datanode
-    state: present
-  become: yes
-
-- name: update supervisort config for nodemanager
-  supervisorctl:
-    name: nodemanager
-    state: present
-  become: yes
+  notify:
+    - update supervisorctl config file
 
 - name: update supervisort config for datanode
   supervisorctl:

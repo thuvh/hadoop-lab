@@ -14,12 +14,6 @@
   become: yes
   ignore_errors: yes
 
-- name: remove supervisorctl config of namenode
-  supervisorctl:
-    name: namenode
-    state: absent
-  become: yes
-
 - name: Template a file to /etc/supervisor/conf.d/hadoop.conf
   template:
     src: hadoop.conf.j2
@@ -28,12 +22,8 @@
     group: root
     mode: '0644'
   become: yes
-
-- name: update supervisorctl config of namenode
-  supervisorctl:
-    name: namenode
-    state: present
-  become: yes
+  notify:
+    - update supervisorctl config file
 
 - name: start namenode
   supervisorctl:
