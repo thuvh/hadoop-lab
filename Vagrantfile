@@ -15,6 +15,8 @@ node_configs = configs.fetch('node')
 roles = configs.fetch('roles')
 prefix = node_configs.fetch('prefix')
 domain = node_configs.fetch('domain')
+network_type = configs.fetch('net').fetch('network_type')
+nic_type = configs.fetch('net').fetch('nic_type')
 
 KEY_ALL = 'all'
 KEY_CHILDREN = 'children'
@@ -127,7 +129,12 @@ Vagrant.configure("2") do |config|
           v.customize [ "storageattach", :id, "--storagectl", "SCSI", "--port", "1", "--device", "0", "--medium", second_disk]
         end
 
-        node.vm.network configs.fetch('net').fetch('network_type'), ip: node_ip, nic_type: $private_nic_type
+        if network_type == "public_network"
+          node.vm.network network_type, ip: node_ip, nic_type: nice_type, bridge: network_type = configs.fetch('net').fetch('bridge')
+        else
+          node.vm.network network_type, ip: node_ip, nic_type: nice_type
+        end
+
         node.vm.hostname = hostname
 
         if Vagrant.has_plugin?('vagrant-hostmanager')
