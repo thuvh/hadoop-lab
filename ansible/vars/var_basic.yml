@@ -69,7 +69,7 @@ hadoop_conf_files:
   -
     name: hadoop-env.sh
     template: hadoop-env.sh.j2
-    dest: /home/{{ hadoop_user }}/{{ conf_directory }}/hadoop-env.sh"
+    dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/hadoop-env.sh"
 
 hadoop_conf:
   namenode:
