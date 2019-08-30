@@ -1,0 +1,26 @@
+---
+- hosts: all:!db
+  tasks:
+  - debug:
+      msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+
+  - debug:
+      msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }} and IP {{ ansible_default_ipv4.address }}"
+    when: ansible_default_ipv4.gateway is defined
+
+  - name: register uptime
+    shell: /usr/bin/uptime
+    register: result
+
+  - debug: msg="{{result.stdout}}"
+  - debug: var=result['stdout']
+  - debug: msg="{{result['stdout']}}"
+
+  - debug:
+      var: hostvars[inventory_hostname]['ansible_nodename']
+
+  - debug:
+      msg: "{{ hostvars }}"
+
+  - debug:
+      msg: "{{ groups }}"

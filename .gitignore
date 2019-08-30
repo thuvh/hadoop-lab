@@ -16,3 +16,7 @@ terraform.tfvars
 id_rsa
 
 ansible/hosts/main.yml
+ansible/hosts/main-office-01.yml
+
+files/hadoop-3.1.2
+files/spark-2.4.3-bin-hadoop2.7

@@ -5,3 +5,26 @@
     regexp: '^127\.0\.1\.1'
     state: absent
   become: yes
+
+- name: remove 127.0.0.1
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    state: absent
+  become: yes
+
+- name: remove 127.0.0.1
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.0.1  localhost'
+    state: present
+  become: yes
+
+- name: fix hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ hostvars[item]['ansible_host'] }}  {{ item + '.' + domain }}  {{ item }}"
+    state: present
+  with_items: "{{ groups['all'] }}"
+  become: yes
+  when: public_network is defined and public_network
