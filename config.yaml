@@ -43,6 +43,16 @@ roles:
     hostname_template: hs%02i
     description: history server
   -
+    name: hive
+    count: 2
+    hostname_template: hv%02i
+    description: hive
+  -
+    name: metastore
+    count: 1
+    hostname_template: ms%02i
+    description: metastore server
+  -
     name: db
     count: 2
     hostname_template: ps%02i
@@ -64,6 +74,10 @@ node:
   ansible_ssh_private_key_file: files/id_rsa
 net:
   private_nic_type: 82545EM
-  network_type: private_network
+  network_type: public_network
+  bridge:
+    - eno1
+    - "en4: Ethernet"
+    - "en1: Wi-Fi (AirPort)"
 ip:
-  node: 192.168.56.150
+  node: 192.168.10.210

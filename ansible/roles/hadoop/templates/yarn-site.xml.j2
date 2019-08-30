@@ -37,8 +37,16 @@
     <name>yarn.nodemanager.resource.memory-mb</name>
     <value>{{ hadoop_conf.yarn.nodemanager.resource.memory_mb }}</value>
   </property>
+
   <property>
     <name>yarn.web-proxy.address</name>
     <value>{{ hadoop_conf.yarn.web-proxy.address }}</value>
   </property>
+
+  <property>
+    <name>yarn.timeline-service.address</name>
+    <value>{{ hadoop_conf.yarn.web-proxy.address }}</value>
+  </property>
+
+
 </configuration>

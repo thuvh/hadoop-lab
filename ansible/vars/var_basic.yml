@@ -89,6 +89,12 @@ hadoop_conf:
         memory_mb: 8192
     web-proxy:
       address: "wp01.{{ domain }}:9046"
+    timeline-service:
+      enabled: true
+      version: "1.5"
+      hostname: "ts01.{{ domain }}"
+      http-cross-origin:
+        enabled: false
   mapreduce:
     jobhistory:
       address: "hs01.{{ domain }}"
