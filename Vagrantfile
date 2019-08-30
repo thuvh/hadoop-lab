@@ -130,9 +130,9 @@ Vagrant.configure("2") do |config|
         end
 
         if network_type == "public_network"
-          node.vm.network network_type, ip: node_ip, nic_type: nice_type, bridge: network_type = configs.fetch('net').fetch('bridge')
+          node.vm.network network_type, ip: node_ip, nic_type: nic_type, bridge: configs.fetch('net').fetch('bridge')
         else
-          node.vm.network network_type, ip: node_ip, nic_type: nice_type
+          node.vm.network network_type, ip: node_ip, nic_type: nic_type
         end
 
         node.vm.hostname = hostname
