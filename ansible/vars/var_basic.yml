@@ -95,6 +95,7 @@ hadoop_conf:
       hostname: "ts01.{{ domain }}"
       http_cross_origin:
         enabled: false
+      address: "ts01.{{ domain }}:64000"
   mapreduce:
     jobhistory:
       address: "hs01.{{ domain }}"
