@@ -87,13 +87,13 @@ hadoop_conf:
     nodemanager:
       resource:
         memory_mb: 8192
-    web-proxy:
+    web_proxy:
       address: "wp01.{{ domain }}:9046"
-    timeline-service:
+    timeline_service:
       enabled: true
       version: "1.5"
       hostname: "ts01.{{ domain }}"
-      http-cross-origin:
+      http_cross_origin:
         enabled: false
   mapreduce:
     jobhistory:
