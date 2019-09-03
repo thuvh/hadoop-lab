@@ -11,6 +11,7 @@
     - "{{ conf_directory }}"
     - "{{ opt_directory }}"
   remote_user: "{{ hadoop_user }}"
+
 - name: create hadoop package home
   file:
     path: "{{ item }}"
@@ -20,6 +21,7 @@
     group: "{{ hadoop_user }}"
   with_items: "{{ hadoop_homes }}"
   remote_user: "{{ hadoop_user }}"
+
 - name: create hadoop data home
   file:
     path: "{{ hadoop_data }}"
@@ -28,18 +30,20 @@
     owner: "{{ hadoop_user }}"
     group: "{{ hadoop_user }}"
   become: yes
+
 - name: upload hadoop software
   copy:
     src: "files/{{ item }}"
     dest: "/home/{{ hadoop_user }}/{{ packages_directory }}"
   with_items: "{{ hadoop_packages }}"
   remote_user: "{{ hadoop_user }}"
+
 - name: extract hadoop software
   unarchive:
     src: "$HOME/{{ packages_directory }}/{{ item.package }}"
     dest: "{{ item.dst }}"
     remote_src: yes
-    extra_opts: 
+    extra_opts:
       - --strip-components=1
   with_items: "{{ hadoop_unarchives }}"
   remote_user: "{{ hadoop_user }}"

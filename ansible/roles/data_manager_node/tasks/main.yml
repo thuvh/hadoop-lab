@@ -4,6 +4,7 @@
     name: datanode
     state: stopped
   become: yes
+  when: node_config or node_stop
   ignore_errors: yes
 
 - name: stop nodemanager
@@ -11,6 +12,7 @@
     name: nodemanager
     state: stopped
   become: yes
+  when: node_config or node_stop
   ignore_errors: yes
 
 - name: Template a file to /etc/supervisor/conf.d/hadoop.conf
@@ -21,6 +23,7 @@
     group: root
     mode: '0644'
   become: yes
+  when: node_config
   notify:
     - update supervisorctl config file
 
@@ -29,6 +32,7 @@
     name: datanode
     state: started
   become: yes
+  when: node_config or node_start
   ignore_errors: yes
 
 - name: start nodemanager
@@ -36,4 +40,5 @@
     name: nodemanager
     state: started
   become: yes
+  when: node_config or node_start
   ignore_errors: yes

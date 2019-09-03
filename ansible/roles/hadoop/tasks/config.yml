@@ -1,4 +1,13 @@
 ---
+- name: create hadoop data home
+  file:
+    path: "{{ hadoop_data }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_user }}"
+  become: yes
+
 - name: create hadoop config file
   template:
     src: "{{ item.template }}"

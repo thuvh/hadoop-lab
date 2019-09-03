@@ -6,11 +6,6 @@
   vars:
     add_user: yes
     public_network: yes
+    hadoop_install: no
   roles:
-    - user
-    - profile
-    - disk
-    - hosts
-    - os
-    - java
-    - reboot
+    - hadoop

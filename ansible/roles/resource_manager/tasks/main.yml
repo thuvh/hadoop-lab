@@ -4,6 +4,7 @@
     name: resourcemanager
     state: stopped
   become: yes
+  when: resourcemanager_config or resourcemanager_stop
   ignore_errors: yes
 
 - name: Template a file to /etc/supervisor/conf.d/hadoop.conf
@@ -14,6 +15,7 @@
     group: root
     mode: '0644'
   become: yes
+  when: resourcemanager_config
   notify:
     - update supervisorctl config file
 
@@ -22,4 +24,5 @@
     name: resourcemanager
     state: started
   become: yes
+  when: resourcemanager_config or resourcemanager_start
   ignore_errors: yes

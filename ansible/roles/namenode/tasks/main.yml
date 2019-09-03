@@ -4,6 +4,7 @@
     name: namenode
     state: stopped
   become: yes
+  when: namenode_config or namenode_stop
   ignore_errors: yes
 
 - name: format namenode (force)
@@ -12,7 +13,7 @@
     chdir: "{{ hadoop_home }}"
     executable: /bin/bash
   remote_user: "{{ hadoop_user }}"
-  when: namenode_format
+  when: namenode_config or namenode_format
 
 - name: Template a file to /etc/supervisor/conf.d/hadoop.conf
   template:
@@ -22,6 +23,7 @@
     group: root
     mode: '0644'
   become: yes
+  when: namenode_config
   notify:
     - update supervisorctl config file
 
@@ -30,4 +32,5 @@
     name: namenode
     state: started
   become: yes
+  when: namenode_config or namenode_stop
   ignore_errors: yes
