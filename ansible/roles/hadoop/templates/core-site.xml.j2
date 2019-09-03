@@ -24,5 +24,13 @@
   <property>
     <name>hadoop.tmp.dir</name>
     <value>{{ hadoop_data }}</value>
-  </property>  
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hive.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hive.groups</name>
+    <value>*</value>
+  </property>
 </configuration>

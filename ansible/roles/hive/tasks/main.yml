@@ -2,3 +2,7 @@
 - include: setup.yml
   when: hive_install is defined and hive_install
 - include: config.yml
+- include: hiveserver2.yml
+  when: hive_role is defined and hive_role == "hiveserver2"
+- include: hivemetastore.yml
+  when: hive_role is defined and hive_role == "hivemetastore"

@@ -8,12 +8,20 @@
   roles:
     - user
 
-- hosts: metastore, hive
+- hosts: metastore
   vars_files:
    - vars/var_basic.yml
   vars:
-    hadoop_install: no
     hive_install: no
+    hive_role: hivemetastore
   roles:
-    - hadoop
+    - hive
+
+- hosts: hive
+  vars_files:
+   - vars/var_basic.yml
+  vars:
+    hive_install: no
+    hive_role: hiveserver2
+  roles:
     - hive

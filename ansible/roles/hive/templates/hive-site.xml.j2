@@ -2,40 +2,19 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
   <property>
-    <name>hive.metastore.thrift.bind.host</name>
-    <value>{{ hostvars['ms01']['ansible_host'] }}</value>
+    <name>hive.metastore.metrics.enabled</name>
+    <value>true</value>
   </property>
   <property>
-    <name>hive.metastore.uris</name>
-    <value>thrift://{{ hostvars['ms01']['ansible_host'] }}:9083</value>
+    <name>hive.metastore.db.type</name>
+    <value>postgres</value>
   </property>
   <property>
-    <name>hive.server2.thrift.bind.host</name>
-    <value>{{ ansible_host }}</value>
+    <name>hive.server2.enable.doAs</name>
+    <value>false</value>
   </property>
   <property>
-    <name>javax.jdo.option.ConnectionURL</name>
-    <value>{{ hive_conf.metastore.url }}</value>
+    <name>hive.execution.engine</name>
+    <value>tez</value>
   </property>
-  <property>
-    <name>javax.jdo.option.ConnectionDriverName</name>
-    <value>{{ hive_conf.metastore.drivername }}</value>
-  </property>
-  <property>
-    <name>javax.jdo.option.ConnectionUserName</name>
-    <value>{{ hive_conf.metastore.username }}</value>
-  </property>
-  <property>
-    <name>javax.jdo.option.ConnectionPassword</name>
-{% autoescape true %}
-    <value>{{ hive_conf.metastore.password }}</value>
-{% endautoescape %}
-  </property>
-{% if ansible_hostname == "hv01" or ansible_hostname == "hv02" %}
-  <property>
-    <name>hive.server2.thrift.bind.host</name>
-    <value>{{ ansible_host }}</value>
-  </property>
-{% endif %}
-
 </configuration>

@@ -1,0 +1,14 @@
+---
+- name: create hiveserver2-site.xml
+  template:
+    src: hiveserver2/hiveserver2-site.xml.j2
+    dest: "/home/{{ hive_user }}/{{ conf_directory }}/hiveserver2-site.xml"
+  remote_user: "{{ hive_user }}"
+
+- name: link hiveserver2-site.xml
+  file:
+    src: "/home/{{ hive_user }}/{{ conf_directory }}/hiveserver2-site.xml"
+    dest: "{{ hive_home }}/conf/hiveserver2-site.xml"
+    state: link
+    force: yes
+  remote_user: "{{ hive_user }}"

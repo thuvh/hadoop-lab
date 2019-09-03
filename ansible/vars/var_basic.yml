@@ -81,6 +81,10 @@ hive_conf_files:
     name: hive-site.xml
     template: hive-site.xml.j2
     dest: "/home/{{ hive_user }}/{{ conf_directory }}/hive-site.xml"
+  -
+    name: tez-site.xml
+    template: tez-site.xml.j2
+    dest: "/home/{{ hive_user }}/{{ conf_directory }}/tez-site.xml"
 
 hadoop_conf:
   namenode:
