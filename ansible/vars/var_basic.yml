@@ -17,6 +17,8 @@ opt_directory: opt
 
 hadoop_user: hdfs
 hadoop_group: hdfs
+hive_user: hive
+hive_group: hive
 
 hadoop_package: hadoop-3.1.2.tar.gz
 hive_package: apache-hive-3.1.1-bin.tar.gz
@@ -25,24 +27,19 @@ spark_package: spark-2.4.3-bin-hadoop2.7.tgz
 hadoop_packages:
   - "{{ hadoop_package }}"
   - "{{ spark_package }}"
-  - "{{ hive_package }}"
 
 hadoop_home: "/home/{{ hadoop_user }}/{{ opt_directory }}/hadoop-3.1.2"
-hive_home: "/home/{{ hadoop_user }}/{{ opt_directory }}/apache-hive-3.1.1-bin"
+hive_home: "/home/{{ hive_user }}/{{ opt_directory }}/apache-hive-3.1.1-bin"
 spark_home: "/home/{{ hadoop_user }}/{{ opt_directory }}/spark-2.4.3-bin-hadoop2.7"
 
 hadoop_homes:
   - "{{ hadoop_home }}"
   - "{{ spark_home }}"
-  - "{{ hive_home }}"
 
 hadoop_unarchives:
   -
     package: "{{ hadoop_package }}"
     dst: "{{ hadoop_home }}"
-  -
-    package: "{{ hive_package }}"
-    dst: "{{ hive_home }}"
   -
     package: "{{ spark_package }}"
     dst: "{{ spark_home }}"
@@ -70,6 +67,20 @@ hadoop_conf_files:
     name: hadoop-env.sh
     template: hadoop-env.sh.j2
     dest: "/home/{{ hadoop_user }}/{{ conf_directory }}/hadoop-env.sh"
+
+hive_conf_files:
+  -
+    name: hive-env.sh
+    template: hive-env.sh.j2
+    dest: "/home/{{ hive_user }}/{{ conf_directory }}/hive-env.sh"
+  -
+    name: hive-log4j2.properties
+    template: hive-log4j2.properties.j2
+    dest: "/home/{{ hive_user }}/{{ conf_directory }}/hive-log4j2.properties"
+  -
+    name: hive-site.xml
+    template: hive-site.xml.j2
+    dest: "/home/{{ hive_user }}/{{ conf_directory }}/hive-site.xml"
 
 hadoop_conf:
   namenode:
@@ -100,3 +111,9 @@ hadoop_conf:
     jobhistory:
       address: "hs01.{{ domain }}"
 
+hive_conf:
+  metastore:
+    url: jdbc:postgresql://192.168.10.88:5432/hivedb
+    drivername: org.postgresql.Driver
+    username: hiveuser
+    password: h1vEp@&&vv0rd

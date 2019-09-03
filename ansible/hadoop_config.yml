@@ -4,7 +4,6 @@
    - vars/user.yml
    - vars/var_basic.yml
   vars:
-    add_user: yes
     public_network: yes
     hadoop_install: no
   roles:

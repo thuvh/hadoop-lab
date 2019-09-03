@@ -21,6 +21,7 @@ ansible/hosts/main-office-01.yml
 files/hadoop-3.1.2
 files/spark-2.4.3-bin-hadoop2.7
 files/apache-hive-3.1.1-bin
+files/apache-tez-0.9.2-bin
 
 *.tar.gz
 *.retry

@@ -3,10 +3,10 @@
   vars_files:
    - vars/var_basic.yml
   vars:
-    namenode_format: true
-    namenode_config: true
+    namenode_format: false
+    namenode_config: false
     namenode_stop: false
-    namenode_start: false
+    namenode_start: true
   roles:
     - namenode
 
@@ -14,8 +14,8 @@
   vars_files:
     - vars/var_basic.yml
   vars:
-    resourcemanager_config: true
-    resourcemanager_start: false
+    resourcemanager_config: false
+    resourcemanager_start: true
     resourcemanager_stop: false
   roles:
     - resource_manager
@@ -24,8 +24,8 @@
   vars_files:
     - vars/var_basic.yml
   vars:
-    node_config: true
-    node_start: false
+    node_config: false
+    node_start: true
     node_stop: false
   roles:
     - data_manager_node
@@ -34,8 +34,8 @@
   vars_files:
     - vars/var_basic.yml
   vars:
-    historyserver_config: true
-    historyserver_start: false
+    historyserver_config: false
+    historyserver_start: true
     historyserver_stop: false
   roles:
     - history_server
@@ -44,8 +44,8 @@
   vars_files:
     - vars/var_basic.yml
   vars:
-    proxyserver_config: true
-    proxyserver_start: false
+    proxyserver_config: false
+    proxyserver_start: true
     proxyserver_stop: false
   roles:
     - proxy_server

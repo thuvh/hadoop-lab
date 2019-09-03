@@ -29,7 +29,7 @@
     path: "{{ hadoop_home }}/logs"
     owner: "{{ hadoop_user }}"
     group: "{{ hadoop_group }}"
-    mode: '0755'
+    mode: '0777'
     state: 'directory'
   remote_user: "{{ hadoop_user }}"
 
@@ -38,6 +38,20 @@
     src: "{{ hadoop_home }}/logs"
     dest: /var/log/hadoop
     owner: "{{ hadoop_user }}"
-    mode: '0755'
+    mode: '0777'
     state: 'link'
   become: yes
+
+- name: env HADOOP_HOME for "{{ hadoop_user }}"
+  lineinfile:
+    path: "/home/{{ hadoop_user }}/.profile"
+    line: export HADOOP_HOME="\"{{ hadoop_home }}\""
+    state: present
+  remote_user: "{{ hadoop_user }}"
+
+- name: env PATH for "{{ hadoop_user }}"
+  lineinfile:
+    path: "/home/{{ hadoop_user }}/.profile"
+    line: export PATH="\"{{ hadoop_home }}/bin\":$PATH"
+    state: present
+  remote_user: "{{ hadoop_user }}"

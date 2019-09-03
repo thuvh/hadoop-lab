@@ -1,0 +1,37 @@
+---
+- name: create directory for upload package and config
+  file:
+    path: "/home/{{ hive_user }}/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ hive_user }}"
+    group: "{{ hive_group }}"
+  with_items:
+    - "{{ packages_directory }}"
+    - "{{ conf_directory }}"
+    - "{{ opt_directory }}"
+  remote_user: "{{ hive_user }}"
+
+- name: create hive package home
+  file:
+    path: "{{ hive_home }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ hive_user }}"
+    group: "{{ hive_group }}"
+  remote_user: "{{ hive_user }}"
+
+- name: upload hive software
+  copy:
+    src: "files/{{ hive_package }}"
+    dest: "/home/{{ hive_user }}/{{ packages_directory }}"
+  remote_user: "{{ hive_user }}"
+
+- name: extract hive software
+  unarchive:
+    src: "$HOME/{{ packages_directory }}/{{ hive_package }}"
+    dest: "{{ hive_home }}"
+    remote_src: yes
+    extra_opts:
+      - --strip-components=1
+  remote_user: "{{ hive_user }}"

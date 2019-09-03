@@ -1,0 +1,55 @@
+---
+- name: create hive config file
+  template:
+    src: "{{ item.template }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ hive_conf_files }}"
+  remote_user: "{{ hive_user }}"
+
+- name: link hive config file
+  file:
+    src: "{{ item.dest }}"
+    dest: "{{ hive_home }}/conf/{{ item.name }}"
+    state: link
+    force: yes
+  with_items: "{{ hive_conf_files }}"
+  remote_user: "{{ hive_user }}"
+
+- name: make directory for log
+  file:
+    path: "{{ hive_home }}/logs"
+    owner: "{{ hive_user }}"
+    group: "{{ hive_group }}"
+    mode: '0755'
+    state: 'directory'
+  remote_user: "{{ hive_user }}"
+
+- name: link for log
+  file:
+    src: "{{ hive_home }}/logs"
+    dest: /var/log/hive
+    owner: "{{ hive_user }}"
+    mode: '0755'
+    state: 'link'
+  become: yes
+
+- name: env HADOOP_HOME for "{{ hive_user }}"
+  lineinfile:
+    path: "/home/{{ hive_user }}/.profile"
+    line: export HADOOP_HOME="{{ hadoop_home }}"
+    state: present
+  remote_user: "{{ hive_user }}"
+
+- name: env HIVE_HOME for "{{ hive_user }}"
+  lineinfile:
+    path: "/home/{{ hive_user }}/.profile"
+    line: export HIVE_HOME="{{ hive_home }}"
+    state: present
+  remote_user: "{{ hive_user }}"
+
+- name: env PATH for "{{ hive_user }}"
+  lineinfile:
+    path: "/home/{{ hive_user }}/.profile"
+    line: export PATH="{{ hive_home }}/bin:{{ hadoop_home }}/bin:$PATH"
+    state: present
+  remote_user: "{{ hive_user }}"

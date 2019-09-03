@@ -1,0 +1,3 @@
+---
+user: "{{ hive_user }}"
+group: "{{ hive_group }}"

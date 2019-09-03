@@ -1,0 +1,4 @@
+---
+- include: setup.yml
+  when: hive_install is defined and hive_install
+- include: config.yml

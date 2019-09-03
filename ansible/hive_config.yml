@@ -1,0 +1,19 @@
+---
+- hosts: metastore, hive
+  vars_files:
+   - vars/user_hive.yml
+   - vars/var_basic.yml
+  vars:
+    add_user: yes
+  roles:
+    - user
+
+- hosts: metastore, hive
+  vars_files:
+   - vars/var_basic.yml
+  vars:
+    hadoop_install: no
+    hive_install: no
+  roles:
+    - hadoop
+    - hive

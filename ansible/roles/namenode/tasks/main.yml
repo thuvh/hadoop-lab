@@ -32,5 +32,5 @@
     name: namenode
     state: started
   become: yes
-  when: namenode_config or namenode_stop
+  when: namenode_config or namenode_start
   ignore_errors: yes
